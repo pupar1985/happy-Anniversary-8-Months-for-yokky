@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>จดหมายรัก 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-letter">
+ 
+  <div class="hearts-bg">
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+  </div>
+ 
+  <div class="letter-wrap fade-in">
+    <div class="envelope-top">💌</div>
+    <div class="letter-card">
+      <p class="letter-date">happy Anniversary 8 months ♡</p>
+      <h2 class="letter-to">ถึง ที่รักก</h2>
+ 
+      <div class="letter-body">
+        <p>8 เดือนแล้วเย้้้ อยากขอบคุณนะค้าบบที่อยู่ด้วยกันมาจน 8 เดือนแล้ว</p>
+ 
+        <p>อยากขอโทษนะที่งอแงประจำแล้วขอโทษในหลายๆเรื่องนะ</p>
+ 
+        <p>อยากขอบคุณนะที่ยังอยู่ถึงแม้เราจะชอบงอแงหรืออะไรอยากขอบคุณที่ยังไม่ไปไหนนะค้าบบ💕</p>
+ 
+        <p>ไม่มีอะไรจะบอกแล้วแค่อยากบอกว่าอยากให้อยู่ด้วยกันไปนานๆนะค้าบบ แล้วก็รักเธอน้าา❤️</p>
+      </div>
+ 
+      <p class="letter-sign">ด้วยรัก<br><em>จากแฟนของเธอ</em></p>
+    </div>
+ 
+    <div class="nav-btn-wrap" style="display:flex; gap:12px; justify-content:center;">
+        <button class="btn-secondary" onclick="goBack()">← กลับ</button>
+        <button class="btn-main" onclick="goNext()">ต่อไป ➜</button>
+    </div>
+  </div>
+ 
+  <script>
+    function goNext() {
+      document.body.classList.add("fade-out");
+      setTimeout(() => { window.location.href = "page3.html"; }, 600);
+    }
+    function goBack() {
+        document.body.classList.add("fade-out");
+        setTimeout(() => { window.location.href = "index.html"; }, 600);
+    }
+  </script>
+</body>
+</html>

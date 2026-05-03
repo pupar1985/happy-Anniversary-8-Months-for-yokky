@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เพลงของเรา 🎵</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-music">
+
+  <div class="hearts-bg">
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+  </div>
+
+  <div class="music-wrap fade-in">
+    <div class="note-icon">🎵</div>
+    <h2 class="music-title">เพลงของเรา</h2>
+    <p class="music-sub">เปิดเพลงที่ทำให้นึกถึงเรานะ 🌸</p>
+
+    <div class="music-player-wrap">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/h4sZAmd6gSU?si=5_rBF2nhsWVKRx7s" 
+      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <div class="final-msg">
+      <div class="heart-big">❤️</div>
+      <h3>Happy 8 Months นะที่รักก!</h3>
+      <p>รักเธอเสมอน้าา<br>และจะรักไปเรื่อยๆ นะ 💕</p>
+      <p class="counter-txt" id="counter"></p>
+    </div>
+
+    <div class="nav-btn-wrap" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="goBack()">← กลับ</button>
+      <button class="btn-main" onclick="goNext()">ดูรูปของเรา 📸</button>
+    </div>
+  </div>
+
+  <script>
+    const startDate = new Date("2025-09-12");
+    const today = new Date();
+    const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+    document.getElementById("counter").textContent = `อยู่ด้วยกันมาแล้ว ${diff} วัน 🌸`;
+
+    function goNext() {
+      document.body.classList.add("fade-out");
+      setTimeout(() => { window.location.href = "page4.html"; }, 600);
+    }
+    function goBack() {
+      document.body.classList.add("fade-out");
+      setTimeout(() => { window.location.href = "page2.html"; }, 600);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 8 Months 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-lock">
+
+  <div class="hearts-bg">
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+  </div>
+
+  <div class="card fade-in">
+    <div class="lock-icon">🔒</div>
+    <h1 class="title-serif">Happy Anniversary<br><span class="accent">8 Months</span> ❤️</h1>
+    <p class="subtitle">ใส่วันครบรอบของเรานะ</p>
+    <div class="input-wrap">
+      <input type="password" id="myPassword" placeholder="••••••" autocomplete="off">
+    </div>
+    <button class="btn-main" onclick="checkPassword()">Love you 💕</button>
+    <p class="hint">hint: วันครบรอบ 🌸</p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      var pass = document.getElementById("myPassword").value;
+      if (pass === "120968") {
+        document.body.classList.add("fade-out");
+        setTimeout(() => { window.location.href = "page2.html"; }, 600);
+      } else {
+        var input = document.getElementById("myPassword");
+        input.classList.add("shake");
+        setTimeout(() => input.classList.remove("shake"), 500);
+        input.placeholder = "ลองอีกครั้งนะ 😢";
+        input.value = "";
+      }
+    }
+    document.getElementById("myPassword").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") checkPassword();
+    });
+  </script>
+</body>
+</html>

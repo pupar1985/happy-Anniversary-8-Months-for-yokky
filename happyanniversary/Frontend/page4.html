@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รูปของเรา 📸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== MASONRY GALLERY ===== */
+    .gallery-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .gallery-header {
+      margin-bottom: 28px;
+    }
+    .camera-icon {
+      font-size: 2.8rem;
+      display: block;
+      margin-bottom: 10px;
+      animation: floatY 3s ease-in-out infinite;
+    }
+    .gallery-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .gallery-sub {
+      color: var(--text-light);
+      font-size: 0.88rem;
+      font-weight: 300;
+    }
+
+    /* Masonry layout */
+    .masonry {
+      columns: 3;
+      column-gap: 10px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 480px) {
+      .masonry { columns: 2; }
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 4px 16px var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .masonry-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 28px rgba(255,107,149,0.28);
+    }
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+    .masonry-item .caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(74,32,48,0.7));
+      color: white;
+      font-size: 0.72rem;
+      padding: 18px 8px 8px;
+      border-radius: 0 0 14px 14px;
+      opacity: 0;
+      transition: opacity 0.25s;
+      font-weight: 300;
+    }
+    .masonry-item:hover .caption { opacity: 1; }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(74, 32, 48, 0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 480px;
+      width: 100%;
+      animation: fadeInUp 0.3s ease;
+    }
+    .lightbox-inner img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.4);
+      display: block;
+    }
+    .lightbox-caption {
+      text-align: center;
+      color: white;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-weight: 300;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 36px;
+      height: 36px;
+      background: var(--white);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pink-dark);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .lightbox-close:hover { transform: scale(1.15); }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 48px 28px;
+      border: 2px dashed var(--pink-mid);
+      color: var(--text-light);
+      margin-bottom: 28px;
+    }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 14px; display: block; }
+    .empty-state h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--text-mid);
+      margin-bottom: 10px;
+    }
+    .empty-state p { font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
+    .empty-state code {
+      background: var(--pink-light);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.82rem;
+      color: var(--pink-dark);
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body class="page-gallery">
+
+  <div class="hearts-bg">
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+    <span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span>
+  </div>
+
+  <div class="gallery-wrap fade-in">
+    <div class="gallery-header">
+      <span class="camera-icon">📸</span>
+      <h2 class="gallery-title">รูปของเรา</h2>
+      <p class="gallery-sub">ความทรงจำที่สวยงามของเรา 8 เดือน ❤️</p>
+    </div>
+
+    <!-- Masonry grid จะถูกสร้างโดย JS -->
+    <div class="masonry" id="masonryGrid"></div>
+
+    <div class="nav-btn-wrap" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="goBack()">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- Lightbox popup -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <img id="lightboxImg" src="" alt="">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // 👇 แก้ตรงนี้ — ใส่ชื่อไฟล์รูปและคำบรรยายของแต่ละรูป
+    // วางรูปไว้ในโฟลเดอร์ "photos" ข้างๆ ไฟล์นี้
+    // ============================================================
+    const photos = [
+      { src: "photos/photo1.jpg",  caption: "ปิดเทอมใหญ่ของปี1🌸" },
+      { src: "photos/photo2.jpg",  caption: "ถ่ายรูปคู่รูปแรก❤️" },
+      { src: "photos/photo3.jpg",  caption: "ก่อนคบกัน 🥰" },
+      { src: "photos/photo4.jpg",  caption: "เธอกลับบ้านครั้งแรก 💕" },
+      { src: "photos/photo5.jpg",  caption: "เธอไปถ่ายณุปคอนเท้นต์กับดอกไม้แล้วส่งให้ดู 😊" },
+      { src: "photos/photo6.jpg",  caption: "เธอกลับบ้านตอนปิดเทอมใหญ่ 💌" },
+      { src: "photos/photo7.jpg",  caption: "เธอถ่ายภาพให้ดอกไม้เรา 🥰" },
+      { src: "photos/photo8.jpg",  caption: "เธอย้อมสีผมใหม่ 💌" },
+      { src: "photos/photo9.jpg",  caption: "เธอไปทำกิจกรรม adventure แล้วถ่ายมาให้ดู 💌" },
+      { src: "photos/photo10.jpg",  caption: "ภาพที่ชอบ 💌" },
+      { src: "photos/photo11.jpg",  caption: "ภาพที่ชอบ 💌" },
+      { src: "photos/photo12.jpg",  caption: "ชอบรอยยิ้ม 💌" },
+    ];
+    // ============================================================
+
+    const grid = document.getElementById("masonryGrid");
+
+    if (photos.length === 0) {
+      // แสดง empty state ถ้ายังไม่มีรูป
+      grid.innerHTML = `
+        <div class="empty-state">
+          <span class="icon">🖼️</span>
+          <h3>ยังไม่มีรูปภาพ</h3>
+          <p>สร้างโฟลเดอร์ชื่อ <code>photos</code> แล้ววางรูปไว้ข้างใน<br>
+          จากนั้นแก้ชื่อไฟล์ในโค้ด JS ด้านบน</p>
+        </div>`;
+    } else {
+      photos.forEach((photo, i) => {
+        const item = document.createElement("div");
+        item.className = "masonry-item";
+        item.style.animationDelay = `${i * 0.08}s`;
+        item.innerHTML = `
+          <img src="${photo.src}" alt="${photo.caption}" loading="lazy"
+               onerror="this.parentElement.style.display='none'">
+          <div class="caption">${photo.caption}</div>`;
+        item.addEventListener("click", () => openLightbox(photo.src, photo.caption));
+        grid.appendChild(item);
+      });
+    }
+
+    function openLightbox(src, caption) {
+      document.getElementById("lightboxImg").src = src;
+      document.getElementById("lightboxCaption").textContent = caption;
+      document.getElementById("lightbox").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox(e) {
+      if (!e || e.target === document.getElementById("lightbox") || e.currentTarget.tagName === "BUTTON") {
+        document.getElementById("lightbox").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+    }
+
+    // ปิด lightbox ด้วย Esc
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeLightbox({ target: document.getElementById("lightbox") });
+    });
+
+    function goBack() {
+      document.body.classList.add("fade-out");
+      setTimeout(() => { window.location.href = "page3.html"; }, 600);
+    }
+  </script>
+</body>
+</html>
